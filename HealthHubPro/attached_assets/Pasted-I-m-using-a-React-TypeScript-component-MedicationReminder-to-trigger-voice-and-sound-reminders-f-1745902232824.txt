@@ -1,0 +1,91 @@
+I’m using a React + TypeScript component `MedicationReminder` to trigger voice and sound reminders for medications, but it’s not reliably speaking or playing the alarm at the right times. Please update and fix the reminder logic and Web Speech API integration so that each saved medication fires a voice alert exactly at its `reminderTime`, works across navigation, and doesn’t miss triggers. Make sure all code remains in TypeScript with proper typings. Specifically:
+
+1. **Accurate Scheduling with `setTimeout`**  
+   - Replace the 30-second `setInterval` with individual `setTimeout` calls for each upcoming dose.  
+   - On mount and whenever `medications` change, for each `Medication` calculate the delay (in ms) until its next `reminderTime`.  
+   - Use:
+     ```ts
+     const delay = nextReminderDate.getTime() - Date.now();
+     const timerId = window.setTimeout(() => fireReminder(med), delay);
+     ```
+   - After each reminder fires, schedule the next one 24 hours later (`delay + 24*60*60*1000`) for daily doses.  
+   - Store all `timerId`s in a `useRef<Map<string, number>>` keyed by `med.id`, and clear them on cleanup.
+
+2. **Refactor to Type-Safe `fireReminder` Function**  
+   - Create a helper:
+     ```ts
+     function fireReminder(med: Medication): void {
+       console.log(`Firing reminder for ${med.name}`);
+       toast(`Time to take ${med.name} (${med.dosage})`, {
+         icon: <Bell className="h-4 w-4" />,
+         duration: 10000,
+       });
+       speakReminder(`It’s time to take your medication: ${med.name}, ${med.dosage}.`);
+       playAlarm();
+       // Reschedule next daily alarm
+       const nextId = window.setTimeout(() => fireReminder(med), 24 * 60 * 60 * 1000);
+       timersRef.current.set(med.id, nextId);
+     }
+     ```
+   - Ensure `Medication` has a TS interface:
+     ```ts
+     interface Medication {
+       id: string;
+       name: string;
+       dosage: string;
+       reminderTime: string; // “HH:MM”
+     }
+     ```
+
+3. **Type-Safe `speakReminder` Utility**  
+   - Add a reusable function with proper TS signature:
+     ```ts
+     function speakReminder(text: string): void {
+       if (!('speechSynthesis' in window)) {
+         console.error('SpeechSynthesis not supported');
+         return;
+       }
+       window.speechSynthesis.cancel();
+       const utterance = new SpeechSynthesisUtterance(text);
+       utterance.rate = 1;
+       utterance.pitch = 1;
+       window.speechSynthesis.speak(utterance);
+     }
+     ```
+
+4. **Audio Fallback**  
+   - In `playAlarm` maintain its TS signature:
+     ```ts
+     function playAlarm(): void {
+       try {
+         const alarm = new Audio('/alarm.mp3');
+         void alarm.play();
+       } catch (error) {
+         console.error('Failed to play alarm sound:', error);
+       }
+     }
+     ```
+
+5. **Debug Logging & Manual Test**  
+   - When scheduling, log:
+     ```ts
+     console.log(`Scheduling reminder for ${med.name} in ${delay}ms`);
+     ```
+   - Add a **“Test Alarm”** button in your Dashboard component:
+     ```tsx
+     <button onClick={() => { speakReminder('Test reminder'); playAlarm(); }}>
+       Test Alarm
+     </button>
+     ```
+   - This confirms browser support for speech and audio.
+
+6. **Cleanup on Unmount**  
+   - In your `useEffect` cleanup, clear all timers:
+     ```ts
+     return () => {
+       timersRef.current.forEach(id => clearTimeout(id));
+       timersRef.current.clear();
+     };
+     ```
+
+Please refactor the `MedicationReminder` component accordingly, using proper TypeScript types, replacing interval-based logic with precise timeouts, fixing template strings, and ensuring the voice and sound alerts fire exactly at each medication’s scheduled time. Include the manual “Test Alarm” button and logging so we can verify in Replit’s environment. Thank you!```

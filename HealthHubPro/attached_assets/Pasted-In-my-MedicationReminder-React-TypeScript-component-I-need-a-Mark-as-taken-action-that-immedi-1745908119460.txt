@@ -1,0 +1,60 @@
+In my `MedicationReminder` React + TypeScript component, I need a “Mark as taken” action that immediately stops both the voice alert and the alarm sound, and closes the Sonner toast once the reminder fires. Please update the component to:
+
+1. **Keep refs to the current utterance and alarm audio**  
+   ```ts
+   const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
+   const audioRef = useRef<HTMLAudioElement | null>(null);
+When firing a reminder, assign to those refs:
+
+ts
+Copy
+Edit
+function fireReminder(med: Medication) {
+  // ... existing toast + speak + playAlarm logic ...
+  speechRef.current = utterance;
+  audioRef.current = new Audio('/alarm.mp3');
+  audioRef.current.play();
+  // then schedule next day...
+}
+Use Sonner’s toast action to render a “Mark as taken” button in the notification that gives you a hide callback:
+
+ts
+Copy
+Edit
+toast(`Time to take ${med.name} (${med.dosage})`, {
+  icon: <Bell className="h-4 w-4" />,
+  duration: 0,              // show until manually hidden
+  action: {
+    label: 'Mark as taken',
+    onClick: (hide) => {
+      // Stop speech
+      window.speechSynthesis.cancel();
+      // Stop audio
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+      // Clear any pending timeout for this med
+      clearTimeout(timersRef.current.get(med.id));
+      timersRef.current.delete(med.id);
+      // Hide the toast
+      hide();
+    }
+  }
+});
+Ensure you clear the speechRef after cancelling if needed:
+
+ts
+Copy
+Edit
+speechRef.current = null;
+audioRef.current = null;
+Update your scheduleAlarm logic so that each med’s timeout ID is stored in timersRef.current and can be clearTimeout-ed when “Mark as taken” is clicked.
+
+Please implement these changes so that every time a reminder fires:
+
+A toast appears with a “Mark as taken” button.
+
+Clicking that button immediately stops the speech and the alarm sound.
+
+The toast is dismissed and the scheduled timeout for that dose is cleared.```

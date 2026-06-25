@@ -1,0 +1,223 @@
+✨ Build a Full-stack Healthcare & Well-being Website
+Project Name: MediCare Assistant – Prescription Price Comparator & Voice Reminder
+
+📌 Objective:
+Develop a dynamic, error-free, fully working, deployment-stage healthcare web app where:
+
+Users can register/login securely and access a personalized dashboard.
+
+Users can add and manage prescriptions, setting timed voice alerts to remind them to take medicines.
+
+Users can search medicines and compare their real prices across Indian pharmacies.
+
+All actions must be saved and persisted in a backend database and must work after login/logout.
+
+The UI must be responsive, intuitive, and bug-free for real-world deployment.
+
+🛠️ Functional Requirements:
+1. User Authentication (Login/Register System)
+Register new users with username, email, and password.
+
+Passwords should be hashed securely (bcrypt recommended).
+
+Login system must validate existing registered users only.
+
+Session/token management after login to maintain user state.
+
+Common Bug to Avoid:
+❌ Invalid username even after registration.
+❌ Login failures without reason.
+❌ Registration not saving properly.
+
+2. Personalized Dashboard
+After successful login, user should be redirected to their Dashboard.
+
+Dashboard must show:
+
+Welcome back message: "Welcome back, [Username]"
+
+Overview: No. of prescriptions added, upcoming medicine reminder.
+
+Quick buttons to Add Prescription, View Prescriptions, Compare Prices.
+
+Common Bug to Avoid:
+❌ 404 errors when accessing Dashboard, My Prescription, Price Comparison, Profile, or Settings pages.
+❌ Navigation links breaking after login.
+
+3. Prescription Management
+Add new prescriptions with:
+
+Medicine Name
+
+Dosage Form (Tablet, Syrup, etc.)
+
+Quantity
+
+Time for reminder (user sets custom time)
+
+Show saved prescriptions dynamically on My Prescriptions page.
+
+Allow delete/edit prescriptions.
+
+Data must be persisted per user account — even after logout/login.
+
+Common Bug to Avoid:
+❌ Added prescription not saving to database.
+❌ Prescriptions disappearing after logout.
+❌ Prescriptions not displaying properly on Dashboard/My Prescriptions page.
+
+4. Voice Alarm Notification System (Main Feature)
+Use Web Speech API (SpeechSynthesisUtterance) for triggering voice alerts at medicine reminder time.
+
+Must allow:
+
+Setting custom timers for each medicine.
+
+Triggering a human-like voice speaking:
+➔ "It is time to take your medicine: [Medicine Name], [Dosage]".
+
+Voice should work even if the user is on Dashboard, Prescriptions page, or idle.
+
+Voice alarms must repeat until acknowledged (optional enhancement).
+
+Common Bug to Avoid:
+❌ No voice alarm triggering at all.
+❌ Wrong time triggering.
+❌ Alerts not speaking the correct medicine name.
+
+5. Price Comparison Tool for Medicines
+Create a search field for users to type medicine names.
+
+Show realistic static price data or fetch from mock APIs for Indian pharmacies:
+
+Apollo Pharmacy
+
+Netmeds
+
+PharmEasy
+
+Tata 1MG
+
+Compare:
+
+Price in ₹ (INR – Indian Rupees)
+
+Discount offered
+
+Quantity available
+
+Display neatly in a table:
+
+
+Pharmacy	Price (₹)	Discount	Dosage Form	Quantity
+Netmeds	₹95	10%	Tablet	10 tabs
+Highlight lowest price pharmacy in green.
+
+Allow sorting from Low ➔ High price.
+
+Show "No Data Found" properly if medicine not found.
+
+Common Bug to Avoid:
+❌ Price comparison search button disappearing.
+❌ No data showing even when typing medicine names.
+❌ Static dummy prices not aligned to Indian pharmacies or currency.
+
+6. Profile Management
+Allow users to:
+
+Edit profile (username/email/password).
+
+View profile details.
+
+Option to delete account (with confirmation).
+
+Common Bug to Avoid:
+❌ Profile page throwing 404 error.
+❌ Changes not updating properly.
+
+7. Settings Page
+Allow theme settings (light/dark mode optional).
+
+Allow notification preferences (future enhancement).
+
+8. Error Handling Requirements (Must-Have)
+404 Pages: If user lands on a broken link, show a friendly "404 Page Not Found" instead of crashing.
+
+Authentication Errors:
+
+If wrong login, show "Invalid credentials" instead of breaking site.
+
+If duplicate registration, show "Username/Email already exists."
+
+Data Errors:
+
+If price comparison has no result, show "Medicine not available" gracefully.
+
+Form Validation:
+
+No blank submissions allowed.
+
+Proper validations on add prescription, search medicine, etc.
+
+🖥️ Frontend Tech Stack:
+HTML5, CSS3, JavaScript (ES6+)
+
+Bootstrap 5 or Tailwind CSS for responsive, mobile-first design
+
+Web Speech API (for voice alerts)
+
+FontAwesome or similar icons for better UI
+
+🖧 Backend Tech Stack:
+Node.js + Express.js
+
+Database: MongoDB Atlas (preferred) / Replit DB / Firebase
+
+Authentication: bcrypt password hashing + session/cookies management
+
+REST APIs:
+
+/register
+
+/login
+
+/addPrescription
+
+/getPrescriptions
+
+/searchMedicinePrice
+
+/updateProfile
+
+/deleteAccount
+
+🚀 Deployment Instructions:
+Deploy on Replit first (easy testing).
+
+For production deployment, use Vercel or Netlify.
+
+Set up HTTPS (SSL/TLS security).
+
+Add favicon and web manifest for PWA support (optional).
+
+🎯 Ultimate Project Goals Checklist
+
+Feature	Should Work Without Bugs
+Register and Login	✅
+Dashboard and Navigation	✅
+Prescription Add/View/Delete	✅
+Voice Alarm Reminder (timed)	✅
+Price Comparison by Indian Pharmacies	✅
+Profile Management	✅
+Full Error Handling (404, auth errors)	✅
+Persistent Data Saving (after logout)	✅
+No UI Broken Pages	✅
+Deployed Secure Website	✅
+⚡ Final Note:
+Build slowly and systematically, module by module.
+
+Test every feature individually before connecting.
+
+Make sure no bugs, no 404s, no missing functionalities like last time.
+
+Target is a professional-level, user-deployable, bug-free, dynamic healthcare web app

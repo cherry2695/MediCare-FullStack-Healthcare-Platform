@@ -1,0 +1,43 @@
+We need the app to play a clear voice alert exactly when a medication’s reminder time arrives. Please update our alarm/reminder logic as follows:
+
+1. **Load & Schedule on Startup**  
+   - After loading `alarms` from `localStorage` and calling `renderAlarms()`, immediately loop through each alarm and call `scheduleAlarm(a)` so reminders survive reloads.
+
+2. **Exact Timing with `setTimeout`**  
+   - In `scheduleAlarm(a)`, compute the exact millisecond delay until `a.time` (today or tomorrow if time has passed).  
+   - Use `const timeoutId = window.setTimeout(() => fireAlarm(a), delay);` instead of polling.
+
+3. **Robust Voice Alert**  
+   - In `fireAlarm(a)`, before speaking, call `window.speechSynthesis.cancel()`.  
+   - Check for support:  
+     ```js
+     if (!('speechSynthesis' in window)) {
+       console.error('SpeechSynthesis not supported');
+       return;
+     }
+     ```  
+   - Create and configure an utterance with proper template strings:  
+     ```js
+     const utter = new SpeechSynthesisUtterance(
+       `It’s ${a.time}. Time to take your medicine: ${a.name}.`
+     );
+     utter.rate = 1;
+     utter.pitch = 1;
+     window.speechSynthesis.speak(utter);
+     ```
+
+4. **Audio Fallback**  
+   - Immediately after `speak()`, play a fallback beep:  
+     ```js
+     new Audio('/beep.mp3').play().catch(err => console.error(err));
+     ```
+
+5. **Cleanup & Reschedule**  
+   - In `removeAlarm(a.id)`, clear the pending timeout: `clearTimeout(a.timeoutId)`.  
+   - After firing, remove the alarm or, for recurring reminders, call `scheduleAlarm(a)` again for the next day.
+
+6. **Debug & Test**  
+   - Add `console.log('Scheduling', a.name, 'in', delay)` in `scheduleAlarm` and `console.log('Firing alarm for', a.name)` in `fireAlarm`.  
+   - Add a “Test Reminder” button that calls `fireAlarm({ id:'test', name:'Test', time:new Date().toLocaleTimeString().slice(0,5) })` so we can verify voice alerts work in the browser.
+
+Please integrate these changes so that users hear the voice alert (“It’s HH:MM. Time to take your medicine: Name.”) precisely when their prescription reminder time comes due. Thank you!```

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60">
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#3B82F6" d="M28 0c15.464 0 28 12.536 28 28S43.464 56 28 56 0 43.464 0 28 12.536 0 28 0zm0 4C14.745 4 4 14.745 4 28s10.745 24 24 24 24-10.745 24-24S41.255 4 28 4z"/>
+    <path fill="#3B82F6" d="M28 8a2 2 0 012 2v16h16a2 2 0 010 4H30a2 2 0 01-2-2V10a2 2 0 012-2z"/>
+    <path stroke="#3B82F6" stroke-width="4" d="M12 22l6 6 8-10 8 12 6-8 4 6"/>
+    <text font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#3B82F6">
+      <tspan x="70" y="34">MediCare</tspan>
+    </text>
+    <text font-family="Arial, sans-serif" font-size="18" font-weight="normal" fill="#666">
+      <tspan x="180" y="34">Assistant</tspan>
+    </text>
+  </g>
+</svg>
