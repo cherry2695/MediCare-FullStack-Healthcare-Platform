@@ -18,3 +18,21 @@ With an intuitive and responsive interface, the platform enhances accessibility 
 - 📱 Responsive and user-friendly interface
 - ⚡ Fast and optimized performance
 - 🎨 Modern UI built with Tailwind CSS
+
+---
+
+## 🛠️ Tech Stack
+
+- TypeScript
+- JavaScript (ES6+)
+- HTML5
+- CSS3
+- Tailwind CSS
+
+---
+
+### Core Features 
+
+- Medicine Price Comparison
+- Medication Reminder System
+- Voice Alerts & Notifications
