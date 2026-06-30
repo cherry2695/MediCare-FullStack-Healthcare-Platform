@@ -1,38 +1,61 @@
-# MediCare-FullStack-Healthcare-Platform
-MediCare is a modern full-stack healthcare management platform designed to streamline interactions between patients, doctors, and healthcare providers. The platform enables appointment booking, patient record management, doctor scheduling, and secure healthcare services through an intuitive and responsive web application.
+# 🏥 MediCare Assistant
 
-## 📖 About
-
-**Medicare Assistant** is a patient-centric healthcare platform built to improve medication adherence and reduce healthcare costs. The application allows users to compare medicine prices from multiple pharmacies, schedule medicine reminders with customizable timers, and receive voice-based alerts for timely medication intake.
-
-With an intuitive and responsive interface, the platform enhances accessibility while helping users effectively manage their daily medication routines.
+A modern full-stack healthcare platform that helps patients manage prescriptions, receive voice-based medication reminders, compare medicine prices across multiple pharmacies, and stay informed through real-time notifications. The application is designed to improve medication adherence and simplify healthcare management with an intuitive and responsive user interface.
 
 ---
 
 ## ✨ Features
 
-- 💊 Compare medicine prices across multiple pharmacies
-- ⏰ Create personalized medicine reminders and schedules
-- 🔔 Smart medication alerts and notifications
-- 🎙️ Voice-enabled reminders for medicine intake
+- 💊 Add, edit, and delete prescriptions
+- ⏰ Schedule medication reminders
+- 🔊 Voice-based medication alerts
+- 💰 Compare medicine prices across different pharmacies
+- 🔔 Real-time notification system
+- 📊 Interactive dashboard with prescription overview
+- 🔐 Secure user authentication and session management
 - 📱 Responsive and user-friendly interface
-- ⚡ Fast and optimized performance
-- 🎨 Modern UI built with Tailwind CSS
 
 ---
 
 ## 🛠️ Tech Stack
 
+### Frontend
+- React.js
 - TypeScript
-- JavaScript (ES6+)
-- HTML5
-- CSS3
-- Tailwind CSS
+- Vite
+- Tailwind CSS 
+- Radix UI
+- HTML
+
+### Backend
+- Node.js
+- Express.js
+
+### Database
+- PostgreSQL
+- Drizzle ORM
+
+### Authentication
+- Passport.js
+- Express Session
+
+### Tools
+- Git & GitHub
+- VS Code
+- Replit Agent
 
 ---
 
-### Core Features 
+## 📸 Screenshots
 
-- Medicine Price Comparison
-- Medication Reminder System
-- Voice Alerts & Notifications
+### 🏠 Home Page
+![Home Page](screenshots/home.png)
+
+### 📊 Dashboard
+![Dashboard](screenshots/dashboard.jpg)
+
+### 💊 My Prescriptions
+![My Prescriptions](screenshots/prescriptions.jpg)
+
+### 💰 Price Comparison
+![Price Comparison](screenshots/price-comparison.png)
