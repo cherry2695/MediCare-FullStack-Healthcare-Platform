@@ -49,13 +49,13 @@ A modern full-stack healthcare platform that helps patients manage prescriptions
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home Page](screenshots/home.png)
+![Home Page](HealthHubPro/client/public/assets/Medicare_Home.png)
 
 ### 📊 Dashboard
-![Dashboard](screenshots/dashboard.jpg)
+![Dashboard](HealthHubPro/client/public/assets/Medicare_Assistant.jpg)
 
 ### 💊 My Prescriptions
-![My Prescriptions](screenshots/prescriptions.jpg)
+![My Prescriptions](HealthHubPro/client/public/assets/Medicare_Prescription.jpg)
 
 ### 💰 Price Comparison
-![Price Comparison](screenshots/price-comparison.png)
+![Price Comparison](HealthHubPro/client/public/assets/Medicare_PriceComparision.png)
